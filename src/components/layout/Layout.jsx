@@ -9,8 +9,7 @@ const Layout = ({ children }) => {
   return (
     <StyledLayout>
       <StyledNav>
-        <StyledNavLink to="/">Home</StyledNavLink>
-        <StyledNavLink to="/starwars">Star Wars</StyledNavLink>
+        <StyledNavLink to="/starwars">HOME</StyledNavLink>
       </StyledNav>
       <ContentContainer>{children}</ContentContainer>
     </StyledLayout>

@@ -9,3 +9,10 @@ export const getCharacters = async () => {
 export const getIdFromUrl = (url) => url.substring(url.lastIndexOf('/', url.lastIndexOf('/') - 1) + 1, url.lastIndexOf('/'));
 
 export const getCharacterById = (id) => i.get(`/people/${id}/`);
+
+export const getFilmFromId = (id) => i.get(`/people/film/${id}`);
+
+export const getSpeciesFromId = (id) => i.get(`/people/species/${id}`);
+
+
+

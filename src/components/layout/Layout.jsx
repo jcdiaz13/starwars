@@ -10,6 +10,8 @@ const Layout = ({ children }) => {
     <StyledLayout>
       <StyledNav>
         <StyledNavLink to="/starwars">HOME</StyledNavLink>
+        <StyledNavLink to="/falacias">FALACIAS</StyledNavLink>
+        <StyledNavLink to="/firebase">FIRE BASE</StyledNavLink>
       </StyledNav>
       <ContentContainer>{children}</ContentContainer>
     </StyledLayout>

@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
-import { createPerson, deleteItem, getItems } from "../../app/services/people";
+import {
+  createPerson,
+  deleteItem,
+  getItems,
+  updateItem,
+} from "../../app/services/people";
+import { Box, Container, Row } from "./Firebase.styles";
 
 const Firebase = () => {
   const [userName, setUserName] = useState("");
-  const [userIdToDelete, setUserIdToDelete] = useState("");
+  const [userId, setUserId] = useState("");
   const [users, setUsers] = useState([]);
   // RECIBE COMO PARAMETROS DE ENTRADA LA ID DE LO QUE QUEREMOS MODIFICAR Y UN OBJETO CON LOS NUEVOS VALORES.
   useEffect(() => {
@@ -11,8 +17,9 @@ const Firebase = () => {
   }, []);
 
   const consult = () => {
-    getItems().then((deletedPerson) => {
-      setUsers(deletedPerson);
+    // getItems().then(setUsers) Forma simplificada
+    getItems().then((response) => {
+      setUsers(response);
     });
   };
 
@@ -23,13 +30,20 @@ const Firebase = () => {
   };
 
   const handleDeleteById = async () => {
-    await deleteItem(userIdToDelete);
+    await deleteItem(userId);
     consult();
-    setUserIdToDelete("");
+    setUserId("");
+  };
+
+  const handleUpdateById = async () => {
+    await updateItem(userId, { userName: userName });
+    consult();
+    setUserName("");
+    setUserId("");
   };
 
   return (
-    <>
+    <Container>
       <div>
         <input
           type="text"
@@ -37,24 +51,29 @@ const Firebase = () => {
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
         />
-        <button onClick={handleAddPerson}>ADD PERSON</button>
+
         <input
           type="text"
-          placeholder="Enter User ID to delete"
-          value={userIdToDelete}
-          onChange={(e) => setUserIdToDelete(e.target.value)}
+          placeholder="Enter User ID"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
         />
+        <button onClick={handleAddPerson}>ADD PERSON</button>
         <button onClick={handleDeleteById}>DELETE USER BY ID</button>
+        <button onClick={handleUpdateById}>UPDATE USER BY ID</button>
       </div>
-      <div>
+      <Box>
         {users.map((user) => (
           <div key={user.id}>
-            {user.userName}__________________________________________________
-            {user.id}
+            <Row>
+              <p>{user.userName}</p>
+              <p>{user.id}</p>
+            </Row>
+            {/* <ColRight>{user.id}</ColRight> */}
           </div>
         ))}
-      </div>
-    </>
+      </Box>
+    </Container>
   );
 };
 

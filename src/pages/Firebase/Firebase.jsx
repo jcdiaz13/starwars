@@ -63,13 +63,12 @@ const Firebase = () => {
         <button onClick={handleUpdateById}>UPDATE USER BY ID</button>
       </div>
       <Box>
-        {users.map((user) => (
+        {users?.map((user) => (
           <div key={user.id}>
             <Row>
               <p>{user.userName}</p>
               <p>{user.id}</p>
             </Row>
-            {/* <ColRight>{user.id}</ColRight> */}
           </div>
         ))}
       </Box>
